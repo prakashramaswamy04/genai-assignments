@@ -1,0 +1,13 @@
+npm install  -- for initial setup only this command required
+
+N - node
+P - Package
+M - Manager
+
+which is responsible for creating node_module which serves as dependencies of Reactjs application
+
+
+NPM RUN DEV
+
+--> node package manager running the development server locally
+

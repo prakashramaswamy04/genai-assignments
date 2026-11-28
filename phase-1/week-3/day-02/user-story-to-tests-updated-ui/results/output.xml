@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.3 on darwin)" generated="2026-11-27T15:00:01.549324" rpa="false" schemaversion="5">
+<suite id="s1" name="User-Story-To-Tests-Updated-Ui" source="/Users/prakash.ramaswamy/Documents/GitHub/user-story-to-tests-updated-ui">
+<suite id="s1-s1" name="Test" source="/Users/prakash.ramaswamy/Documents/GitHub/user-story-to-tests-updated-ui/test.robot">
+<test id="s1-s1-t1" name="TC-001 User Input" line="15">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:01.620977" level="INFO">Opening browser 'chrome' to base url 'https://rahulshettyacademy.com/AutomationPractice/'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-27T15:00:01.620767" elapsed="4.325381"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-11-27T15:00:05.946918" elapsed="0.404005"/>
+</kw>
+<kw name="Select From List By Label" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.351604" level="INFO">Selecting options from selection list 'id=dropdown-class-example' by label Option1.</msg>
+<arg>${DROPDOWN}</arg>
+<arg>Option1</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.351148" elapsed="0.034665"/>
+</kw>
+<kw name="Get Selected List Label" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.403031" level="INFO">${selected} = Option1</msg>
+<var>${selected}</var>
+<arg>${DROPDOWN}</arg>
+<doc>Returns the label of selected option from selection list ``locator``.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.386014" elapsed="0.017101"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${selected}</arg>
+<arg>Option1</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.403343" elapsed="0.000573"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.404153" level="INFO">Clicking element 'id=checkBoxOption3'.</msg>
+<arg>${CHECKBOX_OPTION3}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.404023" elapsed="0.019460"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.423827" level="INFO">Clicking element 'id=show-textbox'.</msg>
+<arg>${SHOW_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.423646" elapsed="0.025237"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.456169" level="INFO">Element 'id=displayed-text' is displayed.</msg>
+<arg>${DISPLAYED_TEXT}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.449070" elapsed="0.007197"/>
+</kw>
+<kw name="Select Frame" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.456695" level="INFO">Selecting frame 'id=courses-iframe'.</msg>
+<arg>${COURSES_IFRAME}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.456508" elapsed="0.008017"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-27T15:00:06.464860" level="INFO">Clicking element 'css=div:nth-of-type(2) &gt; ul &gt; li:nth-of-type(1) &gt; a'.</msg>
+<arg>${IFRAME_HOME_LINK}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.464690" elapsed="0.036565"/>
+</kw>
+<kw name="Unselect Frame" owner="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.501421" elapsed="0.000809"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-11-27T15:00:06.502317" elapsed="0.074438"/>
+</kw>
+<doc>Verify dropdown selection, checkbox state, textbox visibility and Home link inside iframe.</doc>
+<status status="PASS" start="2026-11-27T15:00:01.619218" elapsed="4.957820"/>
+</test>
+<status status="PASS" start="2026-11-27T15:00:01.564553" elapsed="5.014501"/>
+</suite>
+<status status="PASS" start="2026-11-27T15:00:01.551713" elapsed="5.028640"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="User-Story-To-Tests-Updated-Ui" id="s1" pass="1" fail="0" skip="0">User-Story-To-Tests-Updated-Ui</stat>
+<stat name="Test" id="s1-s1" pass="1" fail="0" skip="0">User-Story-To-Tests-Updated-Ui.Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

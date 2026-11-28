@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DemoShop – My profile</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <header class="top"><strong>DemoShop</strong><span>Signed in · <a href="index.html" id="signout">Sign out</a></span></header>
+  <main class="panel">
+    <h1>My profile</h1>
+    <form id="profileForm" name="profile" novalidate>
+      <label for="fullName">Full name</label>
+      <input id="fullName" name="fullName" required minlength="2" maxlength="60">
+      <label for="country">Country</label>
+      <select id="country" name="country" required>
+        <option value="">Choose…</option>
+        <option>India</option>
+        <option>United Kingdom</option>
+        <option>United States</option>
+      </select>
+      <label for="phone">Phone number (optional)</label>
+      <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digits">
+      <label class="inline"><input id="newsletter" name="newsletter" type="checkbox"> Send me the newsletter</label>
+      <p id="profileError" class="error" role="alert" hidden></p>
+      <button id="save" type="submit">Save changes</button>
+    </form>
+    <p id="saved" class="success" role="status" hidden>Profile saved.</p>
+  </main>
+  <script>
+    document.getElementById("profileForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("fullName").value.trim();
+      const country = document.getElementById("country").value;
+      const phone = document.getElementById("phone").value.trim();
+      const err = document.getElementById("profileError");
+      const ok = document.getElementById("saved");
+      let msg = "";
+      if (name.length < 2) msg = "Enter your full name (at least 2 characters).";
+      else if (!country) msg = "Choose a country.";
+      else if (phone && !/^\d{10}$/.test(phone)) msg = "The phone number must be 10 digits.";
+      err.textContent = msg;
+      err.hidden = !msg;
+      ok.hidden = Boolean(msg);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "PromptForge — ICEPOT Prompt Engineer",
+  "short_name": "PromptForge",
+  "version": "1.1.0",
+  "description": "Turn rough ideas and technical requirements into accurate, structured ICEPOT prompts.",
+  "action": {
+    "default_title": "Open PromptForge",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "clipboardWrite"],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  }
+}

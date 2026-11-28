@@ -1,0 +1,11 @@
+{
+  "name": "promptforge-chrome-extension",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "PromptForge — AI-powered ICEPOT prompt engineering workspace",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node --check background.js && node --check popup/popup.js && node --check dashboard/dashboard.js && node --check services/ai-service.js && node --check services/prompt-service.js && node --check services/quality-service.js && node --check services/storage-service.js && node --check services/usage-service.js && node --check utils/constants.js && node --check utils/helpers.js && node --check utils/validators.js && node --check prompts/icepot-system-prompt.js"
+  }
+}

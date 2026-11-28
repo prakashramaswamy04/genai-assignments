@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ledge-3.0 — UI Guide</title>
+<style>
+  @font-face { font-family: "Poppins"; font-weight: 400; src: url("../../fonts/poppins-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 500; src: url("../../fonts/poppins-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 600; src: url("../../fonts/poppins-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Poppins"; font-weight: 700; src: url("../../fonts/poppins-latin-700-normal.woff2") format("woff2"); }
+
+  @page {
+    size: A4; margin: 16mm 15mm 16mm 15mm;
+    @bottom-left { content: "Ledge-3.0 · UI Guide"; font: 8pt Poppins, sans-serif; color: #9CA3AF; }
+    @bottom-right { content: counter(page); font: 8pt Poppins, sans-serif; color: #9CA3AF; }
+  }
+  @page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+
+  :root { --ink: #111827; --ink-2: #374151; --muted: #6B7280; --line: #E5E7EB; --soft: #F6F7F9; --green: #15C872; --green-d: #0F9F5B; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font: 9.6pt/1.55 Poppins, "Segoe UI", sans-serif; color: var(--ink); background: #fff; }
+  h1, h2, h3 { margin: 0; line-height: 1.25; }
+  h2 { font-size: 17pt; font-weight: 700; }
+  h3 { font-size: 10.5pt; font-weight: 600; margin: 12px 0 5px; }
+  p { margin: 0 0 7px; }
+  code, .path { font-family: "Cascadia Code", Consolas, monospace; font-size: 8.4pt; }
+  ul, ol { margin: 0 0 6px; padding-left: 16px; }
+  li { margin: 0 0 3px; }
+  b { font-weight: 600; }
+
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+
+  /* Cover */
+  .cover { height: 297mm; padding: 32mm 22mm 20mm; display: flex; flex-direction: column; position: relative; }
+  .cover .bar { position: absolute; top: 0; left: 0; right: 0; height: 6mm; background: #111; }
+  .cover .bar::after { content: ""; position: absolute; left: 0; bottom: 0; width: 38%; height: 1.4mm; background: var(--green); }
+  .cover .logo { height: 17mm; width: auto; align-self: flex-start; }
+  .cover .title { margin-top: 34mm; display: flex; align-items: center; gap: 6mm; }
+  .cover .title img { width: 22mm; height: 22mm; border-radius: 5mm; }
+  .cover h1 { font-size: 40pt; font-weight: 700; letter-spacing: -.01em; }
+  .cover .sub { font-size: 15pt; color: var(--ink-2); margin-top: 3mm; }
+  .cover .lead { font-size: 11pt; color: var(--muted); max-width: 140mm; margin-top: 10mm; }
+  .cover-shots { margin-top: auto; display: flex; gap: 6mm; align-items: flex-start; }
+  .cover-shots img {
+    width: 52mm; height: 92mm; object-fit: cover; object-position: top;
+    border: 1px solid var(--line); border-radius: 3mm; box-shadow: 0 2mm 6mm rgba(17,24,39,.08);
+  }
+  .cover-shots img.short { height: auto; object-fit: contain; }
+  .cover .meta { margin-top: 10mm; padding-top: 5mm; border-top: 1px solid var(--line); display: flex; justify-content: space-between; color: var(--muted); font-size: 9pt; }
+
+  /* Section header */
+  .sec-head { display: flex; align-items: baseline; gap: 10px; padding-bottom: 6px; border-bottom: 2px solid #111; margin-bottom: 12px; }
+  .sec-num { font-size: 10pt; font-weight: 700; color: #fff; background: #111; border-radius: 6px; padding: 2px 8px; }
+  .sec-head p { margin: 0 0 0 auto; color: var(--muted); font-size: 9pt; }
+  .intro { color: var(--ink-2); font-size: 10pt; margin-bottom: 10px; }
+
+  /* Screenshot + explanation layout */
+  .feature { display: grid; grid-template-columns: 60mm 1fr; gap: 9mm; align-items: start; }
+  .feature.wide-shot { grid-template-columns: 66mm 1fr; }
+  .shot { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot.limit img { max-height: 225mm; width: auto; max-width: 100%; margin: 0 auto; }
+  .caption { font-size: 8pt; color: var(--muted); text-align: center; margin: 4px 0 10px; }
+
+  .steps { list-style: none; padding: 0; counter-reset: s; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 26px; margin-bottom: 7px; }
+  .steps > li::before {
+    content: counter(s); position: absolute; left: 0; top: 1px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--soft); border: 1px solid var(--line); font-size: 8pt; font-weight: 600; text-align: center; line-height: 17px;
+  }
+
+  .files { margin-top: 10px; border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 8px; padding: 8px 11px; background: var(--soft); }
+  .files h4 { margin: 0 0 5px; font-size: 8.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .files table { width: 100%; border-collapse: collapse; }
+  .files td { padding: 2px 0; vertical-align: top; font-size: 8.6pt; }
+  .files td:first-child { width: 48%; padding-right: 8px; color: var(--ink); white-space: nowrap; }
+  .files td:last-child { color: var(--ink-2); }
+
+  .note { border: 1px solid #FDE68A; background: #FFFBEB; color: #92400E; border-radius: 8px; padding: 7px 10px; font-size: 8.8pt; margin-top: 8px; }
+
+  /* Flow */
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 6px 0 14px; }
+  .flow .step { position: relative; border: 1px solid var(--line); border-radius: 10px; padding: 10px 10px 9px; margin-right: 18px; background: #fff; }
+  .flow .step:last-child { margin-right: 0; }
+  .flow .step:not(:last-child)::after { content: "→"; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 12pt; }
+  .flow .tag { display: inline-block; font-size: 7.5pt; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; margin-bottom: 4px; }
+  .flow b { display: block; font-size: 10pt; margin-bottom: 2px; }
+  .flow span.d { font-size: 8.4pt; color: var(--muted); line-height: 1.4; display: block; }
+  .t-red { background: #FEE2E2; color: #B91C1C; } .t-violet { background: #EDE9FE; color: #6D28D9; }
+  .t-blue { background: #DBEAFE; color: #1D4ED8; } .t-amber { background: #FEF3C7; color: #B45309; } .t-teal { background: #CCFBF1; color: #0F766E; }
+
+  table.grid { width: 100%; border-collapse: collapse; font-size: 8.8pt; }
+  table.grid th { text-align: left; font-weight: 600; color: var(--muted); font-size: 8pt; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1.5px solid #111; padding: 5px 6px; }
+  table.grid td { border-bottom: 1px solid var(--line); padding: 5px 6px; vertical-align: top; }
+  table.grid td:first-child { white-space: nowrap; }
+  .tree td:first-child { font-family: "Cascadia Code", Consolas, monospace; font-size: 8.4pt; }
+  .pill { display: inline-block; font-size: 7.6pt; font-weight: 600; padding: 0 7px; border-radius: 999px; border: 1px solid; }
+  .p-green { color: #166534; background: #F0FDF4; border-color: #BBF7D0; } .p-amber { color: #92400E; background: #FFFBEB; border-color: #FDE68A; } .p-grey { color: #4B5563; background: #F3F4F6; border-color: #E5E7EB; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+  .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; border: 1px solid rgba(0,0,0,.1); }
+  .keep { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<!-- ============ Cover ============ -->
+<section class="page cover">
+  <div class="bar"></div>
+  <img class="logo" src="../../icons/testleaf-logo.svg" alt="TestLeaf — Always Ahead">
+  <div class="title">
+    <img src="../../icons/icon128.png" alt="">
+    <div>
+      <h1>Ledge-3.0</h1>
+      <div class="sub">UI guide: features, screens and where the code lives</div>
+    </div>
+  </div>
+  <p class="lead">Ledge-3.0 is a Chrome extension that records a user journey in the browser, turns it into structured manual test cases with an AI model, and converts the cases you pick into Playwright or Selenium scripts.</p>
+  <div class="cover-shots">
+    <img src="images/01-record.png" alt="Record tab">
+    <img src="images/04-results.png" alt="Results tab">
+    <img src="images/03-generate.png" alt="Generate tab">
+  </div>
+  <div class="meta"><span>TestLeaf Software Solutions Pvt. Ltd.</span><span>Version 1.1.0 · November 2026</span></div>
+</section>
+
+<!-- ============ 1. Overview ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">1</span><h2>How it works at a glance</h2></div>
+  <p class="intro">The app lives in Chrome's side panel. You work left to right through four tabs; Settings is a one-time setup.</p>
+
+  <div class="flow">
+    <div class="step"><span class="tag t-red">Record</span><b>Walk the journey</b><span class="d">Click and type on the real page. Every action is captured.</span></div>
+    <div class="step"><span class="tag t-violet">Generate</span><b>Pick model &amp; options</b><span class="d">Choose coverage, priorities and language, then generate.</span></div>
+    <div class="step"><span class="tag t-blue">Results</span><b>Review test cases</b><span class="d">Search, filter, export, and tick cases to automate.</span></div>
+    <div class="step"><span class="tag t-amber">Automate</span><b>Get a script</b><span class="d">Playwright or Selenium code that follows your style.</span></div>
+  </div>
+  <p><span class="tag t-teal" style="display:inline-block;font-size:7.5pt;font-weight:600;padding:1px 7px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em">Settings</span>&nbsp; Add your <b>Groq API key</b> once. Groq is the recommended provider; OpenAI, Anthropic, Gemini and Inception Labs also work.</p>
+
+  <h3>Where things live in the project</h3>
+  <table class="grid tree">
+    <tr><th>Folder / file</th><th>What it contains</th></tr>
+    <tr><td>manifest.json</td><td>The extension definition: name, version, icons, permissions and the API domains it may call.</td></tr>
+    <tr><td>sidepanel/</td><td><b>Everything you see.</b> The panel layout (HTML), the look (CSS) and one script per tab.</td></tr>
+    <tr><td>content/content.js</td><td>Runs inside the web page you test: captures clicks and typing and shows the on-page "recording" badge.</td></tr>
+    <tr><td>background/</td><td>The engine (service worker): stores recordings and keys, builds prompts, calls the AI model, parses replies.</td></tr>
+    <tr><td>background/llm/</td><td>One adapter per AI provider (<code>providers/groq.js</code>, <code>openai.js</code>, …) plus timeouts and error handling.</td></tr>
+    <tr><td>background/prompts/</td><td>The instructions sent to the model for test cases (<code>prompt.js</code>) and for scripts (<code>automationPrompt.js</code>).</td></tr>
+    <tr><td>shared/</td><td>Names and defaults used by both the panel and the engine (<code>constants.js</code>), and the list of pages Chrome won't let us record (<code>blocked.js</code>).</td></tr>
+    <tr><td>icons/ · fonts/</td><td>Toolbar icon, TestLeaf logo, and the bundled Poppins font.</td></tr>
+    <tr><td>docs/</td><td>This guide (<code>docs/guide/</code>), the user manual and a small demo shop for practice.</td></tr>
+  </table>
+
+  <h3>How a request travels</h3>
+  <table class="grid">
+    <tr><th>Step</th><th>What happens</th><th>File</th></tr>
+    <tr><td>1</td><td>You click a button in the side panel.</td><td><code>sidepanel/*-tab.js</code></td></tr>
+    <tr><td>2</td><td>The panel sends a message to the background engine.</td><td><code>background/sw.js</code></td></tr>
+    <tr><td>3</td><td>The engine builds the prompt and calls the provider (Groq by default).</td><td><code>background/generate.js</code>, <code>background/llm/callModel.js</code></td></tr>
+    <tr><td>4</td><td>The reply is checked, repaired if needed, saved and shown in the panel.</td><td><code>background/jsonRepair.js</code>, <code>sidepanel/generate-tab.js</code></td></tr>
+  </table>
+</section>
+
+<!-- ============ 2. Header, tabs & Record ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">2</span><h2>Header, tabs and the Record tab</h2></div>
+  <div class="feature">
+    <div>
+      <div class="shot limit"><img src="images/01-record.png" alt="Record tab"></div>
+      <div class="caption">Record tab with captured actions</div>
+      <div class="shot"><img src="images/02-recording.png" alt="Recording in progress"></div>
+      <div class="caption">While recording: the button and timer turn red</div>
+    </div>
+    <div>
+      <h3>What you see</h3>
+      <ol class="steps">
+        <li><b>Header</b>: the Ledge-3.0 name with the TestLeaf mark. The pill on the right shows <b>Groq ready</b> once a Groq key is saved (amber "Add Groq key" otherwise). Clicking it opens Settings.</li>
+        <li><b>Tab bar</b>: Record, Generate, Results, Automate, Settings. Each tab has its own icon colour; the active tab is raised in white.</li>
+        <li><b>Recorder</b>: <b>Start recording</b>, then use the web page normally. The button turns red (<b>Stop recording</b>) with a running timer, and a small "Ledge-3.0 · recording" badge appears on the page.</li>
+        <li><b>Mask typed values</b>: hides what you type in the captured list. Passwords, tokens, OTP, CVV and card numbers are always masked.</li>
+        <li><b>Captured actions</b>: every navigation, click, change, selection and form submit, in order. <b>Clear</b> empties the list.</li>
+      </ol>
+      <div class="note">Chrome does not allow recording on its own pages (chrome://, the Web Store, the new-tab page). On those pages the panel shows a message and the Record button is disabled.</div>
+
+      <div class="files">
+        <h4>Files behind this screen</h4>
+        <table>
+          <tr><td class="path">sidepanel/sidepanel.html</td><td>Layout of the header, tabs and every card</td></tr>
+          <tr><td class="path">sidepanel/sidepanel.js</td><td>Tab switching, Start/Stop, timer, captured-actions list</td></tr>
+          <tr><td class="path">sidepanel/settings-tab.js</td><td>The "Groq ready" pill in the header</td></tr>
+          <tr><td class="path">content/content.js</td><td>Captures actions on the page; on-page recording badge</td></tr>
+          <tr><td class="path">background/recorder.js</td><td>Starts/stops recording and stores the actions</td></tr>
+          <tr><td class="path">shared/blocked.js</td><td>Pages that cannot be recorded, and the message shown</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. Generate ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">3</span><h2>Generate tab</h2></div>
+  <div class="feature">
+    <div>
+      <div class="shot limit"><img src="images/03-generate.png" alt="Generate tab"></div>
+      <div class="caption">Model, Output and Prompt cards</div>
+      <div class="shot"><img src="images/03b-generating.png" alt="Generating"></div>
+      <div class="caption">While generating: progress bar and spinner</div>
+    </div>
+    <div>
+      <h3>What you see</h3>
+      <ol class="steps">
+        <li><b>Model</b>: choose the <b>Provider</b> (Groq is marked ★ recommended) and the <b>Model</b>. Below the model you see its price per million tokens. The ↻ button checks which models your key can use.</li>
+        <li><b>Temperature</b>: lower is more predictable, higher is more varied. <b>Reasoning effort</b> (Low/Medium/High) appears only for reasoning models such as <code>gpt-oss</code>.</li>
+        <li><b>Output</b>: the <b>Language</b> of the test cases, <b>Max test cases</b> (1 to 40), <b>Coverage</b> types (Functional, Negative, Boundary, Validation, Compatibility, Exploratory, Edge Case, UI, Accessibility, Security, Usability) and which <b>Priorities</b> to include (Critical, High, Medium, Low).</li>
+        <li><b>Prompt</b>: keep the <b>Default prompt</b>, or switch to <b>Custom prompt</b> to add your own guidance (for example, the business domain). <b>Built-in instructions</b> shows exactly what the default sends.</li>
+        <li><b>Generate test cases</b>: starts the run. A green progress bar and a spinner show it is working; when done, the app opens the Results tab.</li>
+      </ol>
+
+      <div class="files">
+        <h4>Files behind this screen</h4>
+        <table>
+          <tr><td class="path">sidepanel/settings-tab.js</td><td>Provider, model, temperature, reasoning effort</td></tr>
+          <tr><td class="path">sidepanel/generate-tab.js</td><td>Output and Prompt options, Generate button, progress</td></tr>
+          <tr><td class="path">background/models.js</td><td>Which models are offered (curated list)</td></tr>
+          <tr><td class="path">background/pricing.js</td><td>Price per model shown under the picker</td></tr>
+          <tr><td class="path">background/generate.js</td><td>Runs a generation from start to finish</td></tr>
+          <tr><td class="path">background/prompts/prompt.js</td><td>The built-in instructions and reply format</td></tr>
+          <tr><td class="path">background/llm/providers/groq.js</td><td>The actual call to Groq</td></tr>
+          <tr><td class="path">background/jobs.js · sidepanel/job.js</td><td>Keep long runs alive until the reply arrives</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. Results ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">4</span><h2>Results tab</h2></div>
+  <div class="feature">
+    <div>
+      <div class="shot limit"><img src="images/04-results.png" alt="Results tab"></div>
+      <div class="caption">Four generated test cases, TC001 expanded, two ticked</div>
+    </div>
+    <div>
+      <h3>What you see</h3>
+      <ol class="steps">
+        <li><b>Summary card</b>: how many test cases, which model, how many actions were used and when. Export as <b>CSV</b>, <b>Markdown</b> or <b>JSON</b>, or <b>Copy</b> everything.</li>
+        <li><b>Usage</b>: input and output tokens and the cost of this run. <b>Cost of this run on every model</b> compares the same run across all supported models.</li>
+        <li><b>Search and filter</b>: type to search any text in the cases, or filter by priority.</li>
+        <li><b>Test case cards</b>: ID, title, type and module, with a priority label (<span class="pill" style="color:#B42318;background:#FEF3F2;border-color:#FECDCA">High</span> <span class="pill p-amber">Medium</span> <span class="pill p-green">Low</span>). Click a card to see preconditions, test data, steps and the expected result.</li>
+        <li><b>Tick boxes</b>: select the cases you want to automate (or <b>Select all shown</b>). The count updates, and the Automate tab picks them up.</li>
+      </ol>
+
+      <div class="files">
+        <h4>Files behind this screen</h4>
+        <table>
+          <tr><td class="path">sidepanel/generate-tab.js</td><td>Renders results, search, filter, select all</td></tr>
+          <tr><td class="path">sidepanel/export.js</td><td>CSV / Markdown / JSON export and Copy</td></tr>
+          <tr><td class="path">sidepanel/selection.js</td><td>Ticked cases, shared with the Automate tab</td></tr>
+          <tr><td class="path">background/usage.js</td><td>Token counts and the cost comparison</td></tr>
+          <tr><td class="path">background/jsonRepair.js</td><td>Fixes slightly broken model replies</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. Automate ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">5</span><h2>Automate tab</h2></div>
+  <div class="feature">
+    <div>
+      <div class="shot limit"><img src="images/05-automate.png" alt="Automate tab"></div>
+      <div class="caption">Two cases converted to a Playwright TypeScript script</div>
+    </div>
+    <div>
+      <h3>What you see</h3>
+      <ol class="steps">
+        <li><b>Selected cases</b>: the IDs you ticked on the Results tab.</li>
+        <li><b>Framework</b>: <b>Playwright</b> or <b>Selenium</b>, and the <b>Language</b> (including Robot Framework). Choose AI-assisted generation or a grounded local template that does not make a provider request.</li>
+        <li><b>Reference script</b> (optional): paste or upload a working test from your project for AI-assisted generation. The new script follows its imports, structure, naming, locator style, waits and assertions.</li>
+        <li><b>Generate … script</b>: AI-assisted mode uses the selected provider and model; local templates work without provider access.</li>
+        <li><b>Script card</b>: <b>Copy</b> or <b>Download</b> the code (the file is named for the framework, e.g. <code>ledge.spec.ts</code>). <b>Gaps to complete by hand</b> lists anything the recording could not supply, such as masked passwords; those spots are marked <code>TODO</code> in the code.</li>
+      </ol>
+      <div class="note">Locators and test data come only from the recording and the page itself. The model is told not to invent selectors, URLs or data.</div>
+
+      <div class="files">
+        <h4>Files behind this screen</h4>
+        <table>
+          <tr><td class="path">sidepanel/automation-tab.js</td><td>Framework, language, reference script, result card</td></tr>
+          <tr><td class="path">background/automate.js</td><td>Runs the conversion</td></tr>
+          <tr><td class="path">background/prompts/automationPrompt.js</td><td>Script instructions and the gaps list</td></tr>
+          <tr><td class="path">sidepanel/export.js</td><td>Copy, Download and the file name</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. Settings ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">6</span><h2>Settings tab</h2></div>
+  <div class="feature">
+    <div>
+      <div class="shot limit"><img src="images/06-settings.png" alt="Settings tab"></div>
+      <div class="caption">All sections expanded</div>
+    </div>
+    <div>
+      <h3>What you see</h3>
+      <ol class="steps">
+        <li><b>Groq API key</b> (highlighted, <i>Recommended</i>): paste the key and click <b>Save key</b>. <b>Get a key</b> opens the Groq console. <b>Test key</b> checks it and reports how many supported models it can use.</li>
+        <li><b>Key shown as dots</b>: the key is hidden while you paste it and, once saved, the field shows a row of dots with a green <b>Saved</b> label. The real key is never shown again; paste a new one to replace it.</li>
+        <li><b>Other providers</b>: OpenAI, Anthropic, Gemini and Inception Labs work the same way. Optional.</li>
+        <li><b>Key storage</b>: keys stay in this browser and go only to that provider. <b>Remember keys</b> on keeps them after a restart; off forgets them when Chrome closes. <b>Clear all</b> removes every key.</li>
+        <li><b>Advanced</b>: request timeout (10 to 280 seconds) and output token limits. <b>Reset defaults</b> restores the originals.</li>
+      </ol>
+
+      <div class="shot" style="margin-top:6px"><img src="images/07-groq-key.png" alt="Saved Groq key shown as dots"></div>
+      <div class="caption">A saved key is displayed as dots; Show is disabled</div>
+
+      <div class="files">
+        <h4>Files behind this screen</h4>
+        <table>
+          <tr><td class="path">sidepanel/settings-tab.js</td><td>Key rows, dot masking, Test key, Advanced</td></tr>
+          <tr><td class="path">background/settings.js</td><td>Where keys are stored; Remember keys</td></tr>
+          <tr><td class="path">shared/constants.js</td><td>Provider list, "Get a key" links, defaults</td></tr>
+          <tr><td class="path">manifest.json</td><td>The provider domains the app may call</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. Models, look & quick reference ============ -->
+<section class="page">
+  <div class="sec-head"><span class="sec-num">7</span><h2>Models, look and quick reference</h2></div>
+
+  <h3>Groq models offered</h3>
+  <p>Only models that suit this job are shown: long structured test-case output and code generation from a large prompt. Retired, enterprise-only, speech and safety-classifier models are hidden.</p>
+  <table class="grid keep">
+    <tr><th>Model</th><th>Status</th><th>Context / max output</th><th>Price per 1M tokens (in / out)</th><th>Use it for</th></tr>
+    <tr><td><code>openai/gpt-oss-120b</code></td><td><span class="pill p-green">Default</span></td><td>131K / 65K</td><td>$0.15 / $0.60</td><td>Best quality for test cases and scripts</td></tr>
+    <tr><td><code>openai/gpt-oss-20b</code></td><td><span class="pill p-grey">Production</span></td><td>131K / 65K</td><td>$0.075 / $0.30</td><td>Faster and cheaper; small journeys</td></tr>
+    <tr><td><code>qwen/qwen3.8-27b</code></td><td><span class="pill p-amber">Preview</span></td><td>131K / 16K</td><td>$0.80 / $4.00</td><td>Alternative; preview models can be withdrawn</td></tr>
+  </table>
+  <p style="color:var(--muted);font-size:8.6pt;margin-top:5px">Model list: <code>background/models.js</code> · prices: <code>background/pricing.js</code> · Groq call: <code>background/llm/providers/groq.js</code>. Checked against Groq's model page on 17 Nov 2026.</p>
+
+  <div class="two" style="margin-top:6px">
+    <div class="keep">
+      <h3>Look and feel</h3>
+      <ul>
+        <li><b>White background</b>, always, even if the computer uses dark mode.</li>
+        <li><b>Buttons</b> are black with white text.</li>
+        <li><b>Icons</b> each have their own colour: record <span class="swatch" style="background:#EF4444"></span>red, generate <span class="swatch" style="background:#8B5CF6"></span>violet, results <span class="swatch" style="background:#2563EB"></span>blue, automate <span class="swatch" style="background:#F59E0B"></span>amber, settings <span class="swatch" style="background:#0D9488"></span>teal.</li>
+        <li><b>Status colours</b>: red while recording, green for success, green progress bar while working.</li>
+        <li><b>Font</b>: Poppins, bundled with the app.</li>
+      </ul>
+      <div class="files">
+        <h4>Files</h4>
+        <table>
+          <tr><td class="path">sidepanel/sidepanel.css</td><td>Colours, icon colour list, layout</td></tr>
+          <tr><td class="path">sidepanel/sidepanel.html</td><td>The icon set (top of the file)</td></tr>
+          <tr><td class="path">fonts/ · icons/</td><td>Poppins, toolbar icon, logo</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="keep">
+      <h3>"I want to change…"</h3>
+      <table class="grid">
+        <tr><th>Change</th><th>Edit</th></tr>
+        <tr><td>Text or layout of a screen</td><td><code>sidepanel/sidepanel.html</code></td></tr>
+        <tr><td>A colour or an icon colour</td><td><code>sidepanel/sidepanel.css</code></td></tr>
+        <tr><td>Which models appear</td><td><code>background/models.js</code></td></tr>
+        <tr><td>A model's price</td><td><code>background/pricing.js</code></td></tr>
+        <tr><td>What the AI is told</td><td><code>background/prompts/</code></td></tr>
+        <tr><td>Default settings</td><td><code>shared/constants.js</code></td></tr>
+        <tr><td>App name, version, icon</td><td><code>manifest.json</code></td></tr>
+        <tr><td>Export file names</td><td><code>sidepanel/export.js</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="margin-top:14px">Install and update</h3>
+  <ol class="steps" style="display:grid; grid-template-columns:1fr 1fr; gap:1mm 8mm">
+    <li>Open <code>chrome://extensions</code> and turn on <b>Developer mode</b>.</li>
+    <li>Click <b>Load unpacked</b> and select the folder that contains <code>manifest.json</code>.</li>
+    <li>Pin <b>Ledge-3.0</b> from the puzzle-piece menu, then click its icon to open the side panel.</li>
+    <li>Go to <b>Settings</b>, paste your Groq key, click <b>Save key</b>, then <b>Test key</b>.</li>
+    <li>After changing any file, click the reload icon on the Ledge-3.0 card and reopen the panel.</li>
+  </ol>
+</section>
+
+</body>
+</html>

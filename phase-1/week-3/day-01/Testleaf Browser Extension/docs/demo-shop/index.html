@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DemoShop – Sign in</title>
+  <meta name="description" content="Two-page demo shop used for the Ledge-3.0 user manual">
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <header class="top"><strong>DemoShop</strong><span>Demo store for the Ledge-3.0 manual</span></header>
+  <main class="panel">
+    <h1>Sign in</h1>
+    <p class="muted">Use any e-mail address and a password of 8 characters or more.</p>
+    <form id="signinForm" name="signin" novalidate>
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="username" placeholder="you@example.com" required>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required>
+      <label class="inline"><input id="remember" name="remember" type="checkbox"> Keep me signed in</label>
+      <p id="signinError" class="error" role="alert" hidden></p>
+      <button id="signin" type="submit">Sign in</button>
+    </form>
+    <p class="muted"><a href="#forgot" id="forgot">Forgot your password?</a></p>
+  </main>
+  <script>
+    document.getElementById("signinForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pwd = document.getElementById("password").value;
+      const err = document.getElementById("signinError");
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) err.textContent = "Enter a valid e-mail address.";
+      else if (pwd.length < 8) err.textContent = "The password must be at least 8 characters.";
+      else return location.assign("profile.html");
+      err.hidden = false;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+ "via": "CDP Extensions.loadUnpacked",
+ "shots": [
+  "01-chrome-extensions",
+  "02-settings-empty",
+  "03-settings-key-saved",
+  "04-header-pill",
+  "05-settings-advanced",
+  "06-model-temperature",
+  "07-model-reasoning",
+  "08-output-options",
+  "09-custom-prompt",
+  "10-default-prompt",
+  "11-record-idle",
+  "12-shop-recording-page",
+  "13-panel-recording",
+  "14-recording-window",
+  "15-record-stopped",
+  "16-shop-profile-saved",
+  "17-results-empty",
+  "18-automation-playwright",
+  "19-automation-selenium"
+ ]
+}

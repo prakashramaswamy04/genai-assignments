@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Ledge-3.0</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../icons/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../icons/icon16.png">
+  <link rel="icon" type="image/svg+xml" href="../icons/testleaf-mark.svg">
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <!-- Icon sprite (Lucide-style stroke icons). Use: <svg class="ic"><use href="#i-name"/></svg> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4M22 5h-4M4 17v2M5 18H3"/></symbol>
+    <symbol id="i-list-checks" viewBox="0 0 24 24"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M14 4.1 12 6M5.1 8l-2.9-.8M6 12l-1.9 2M7.2 2.2 8 5.1"/><path d="M9.04 9.69a.5.5 0 0 1 .65-.65l11 4.5a.5.5 0 0 1-.07.95l-4.35 1.04a1 1 0 0 0-.74.74l-1.04 4.35a.5.5 0 0 1-.95.07z"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65M22 12.65l-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16M18 17V9M13 17V5M8 17v-3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4M21 2l-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></symbol>
+    <symbol id="i-wand" viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72M14 7l3 3M5 6v4M19 14v4M10 2v2M7 8H3M21 16h-4M11 3H9"/></symbol>
+    <symbol id="i-loader" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.22-8.56"/></symbol>
+  </svg>
+
+  <header class="app-header">
+    <img class="app-mark" src="../icons/icon48.png" alt="TestLeaf" width="34" height="34">
+    <div class="brand-text">
+      <h1>Ledge-3.0</h1>
+      <p class="tagline">by <strong>TestLeaf</strong></p>
+    </div>
+    <button id="keysPill" class="pill" type="button" title="Open Settings">
+      <span class="pill-dot" aria-hidden="true"></span><span id="keysPillText">Add Groq key</span>
+    </button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-record" class="t-record" aria-controls="panel-record" aria-selected="true"><span class="t-ico"><svg class="ic"><use href="#i-record"/></svg></span><span>Record</span></button>
+    <button role="tab" id="tab-generate" class="t-generate" aria-controls="panel-generate" aria-selected="false" tabindex="-1"><span class="t-ico"><svg class="ic"><use href="#i-sparkles"/></svg></span><span>Generate</span></button>
+    <button role="tab" id="tab-results" class="t-results" aria-controls="panel-results" aria-selected="false" tabindex="-1"><span class="t-ico"><svg class="ic"><use href="#i-list-checks"/></svg></span><span>Results</span></button>
+    <button role="tab" id="tab-automation" class="t-automate" aria-controls="panel-automation" aria-selected="false" tabindex="-1"><span class="t-ico"><svg class="ic"><use href="#i-code"/></svg></span><span>Automate</span></button>
+    <button role="tab" id="tab-settings" class="t-settings" aria-controls="panel-settings" aria-selected="false" tabindex="-1"><span class="t-ico"><svg class="ic"><use href="#i-settings"/></svg></span><span>Settings</span></button>
+  </nav>
+
+  <main>
+    <!-- ============ Record ============ -->
+    <section id="panel-record" role="tabpanel" aria-labelledby="tab-record">
+      <div id="banner" class="banner" role="status" hidden></div>
+      <div id="blocked" class="banner err" role="alert" hidden></div>
+
+      <div id="recorderCard" class="card recorder hero c-record">
+        <div class="hero-top">
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-record"/></svg></span>
+            <div>
+              <h2>Recorder</h2>
+              <p id="recorderStatus" class="hero-status">Idle. Start recording, then walk through the feature.</p>
+            </div>
+          </div>
+          <span id="recIndicator" class="rec-chip" hidden><span class="rec-dot" aria-hidden="true"></span><span id="recTimer">00:00</span></span>
+        </div>
+        <button id="recordBtn" class="btn primary g-green block lg" type="button">
+          <span class="rec-dot" aria-hidden="true"></span><span id="recordBtnText">Start recording</span>
+        </button>
+        <label class="switch">
+          <input type="checkbox" id="maskValues">
+          <span class="track" aria-hidden="true"></span>
+          <span>Mask typed values</span>
+        </label>
+        <p class="hint">Passwords, tokens, OTP, CVV and card fields are always masked.</p>
+      </div>
+
+      <div class="card c-blue">
+        <div class="card-head">
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-pointer"/></svg></span>
+            <h2>Captured actions <span id="eventCount" class="chip">0</span></h2>
+          </div>
+          <button id="clearBtn" class="btn ghost sm" type="button"><svg class="ic"><use href="#i-trash"/></svg>Clear</button>
+        </div>
+        <ol id="eventList" class="events" aria-live="polite"></ol>
+        <div id="eventsEmpty" class="empty">
+          <span class="empty-ico c-blue"><svg class="ic"><use href="#i-pointer"/></svg></span>
+          <p>No actions yet. Hit <strong>Start recording</strong> and use the page.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Generate ============ -->
+    <section id="panel-generate" role="tabpanel" aria-labelledby="tab-generate" hidden>
+      <div class="card c-violet">
+        <div class="card-title">
+          <span class="h-ico"><svg class="ic"><use href="#i-bot"/></svg></span>
+          <h2>Model</h2>
+        </div>
+        <div class="field">
+          <label for="provider">Provider</label>
+          <select id="provider"></select>
+        </div>
+        <div class="field">
+          <label for="model">Model</label>
+          <div class="row">
+            <select id="model"></select>
+            <button id="refreshModels" class="btn ghost icon" type="button" title="Refresh the live model list" aria-label="Refresh the live model list"><svg class="ic"><use href="#i-refresh"/></svg></button>
+          </div>
+          <p id="modelInfo" class="hint"></p>
+        </div>
+        <div class="field" id="temperatureField">
+          <label for="temperature">Temperature <output id="temperatureValue" for="temperature">0.3</output></label>
+          <input id="temperature" type="range" min="0" max="2" step="0.1">
+        </div>
+        <div class="field" id="effortField" hidden>
+          <label for="reasoningEffort">Reasoning effort</label>
+          <select id="reasoningEffort">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <p id="samplingHint" class="hint"></p>
+      </div>
+
+      <div class="card c-blue">
+        <div class="card-title">
+          <span class="h-ico"><svg class="ic"><use href="#i-file-text"/></svg></span>
+          <h2>Output</h2>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="language">Language</label>
+            <select id="language"></select>
+          </div>
+          <div class="field">
+            <label for="maxCases">Max test cases</label>
+            <input id="maxCases" type="number" min="1" max="40" step="1">
+          </div>
+        </div>
+        <div class="field">
+          <span class="label" id="coverageLabel">Coverage</span>
+          <div class="chips" id="coverage" role="group" aria-labelledby="coverageLabel"></div>
+        </div>
+        <div class="field">
+          <span class="label" id="prioritiesLabel">Priority</span>
+          <div class="checks" id="priorities" role="group" aria-labelledby="prioritiesLabel"></div>
+          <p class="hint">Only test cases with the selected priorities are generated.</p>
+        </div>
+      </div>
+
+      <div class="card c-pink">
+        <div class="card-title">
+          <span class="h-ico"><svg class="ic"><use href="#i-message"/></svg></span>
+          <h2>Prompt</h2>
+        </div>
+        <div class="checks" role="radiogroup" aria-label="Prompt mode">
+          <label class="check"><input type="radio" name="promptMode" value="default"> <span>Default prompt</span></label>
+          <label class="check"><input type="radio" name="promptMode" value="custom"> <span>Custom prompt</span></label>
+        </div>
+        <textarea id="customPrompt" rows="5" maxlength="6000" aria-label="Custom prompt" placeholder="e.g. You are a QA lead for a banking app. Emphasise validation, session timeout and audit-log checks…" hidden></textarea>
+        <details class="prompt-preview">
+          <summary>Built-in prompt (ICEPOT)</summary>
+          <ul id="defaultPrompt" class="icepot"></ul>
+        </details>
+      </div>
+
+      <div id="genBanner" class="banner" role="status" hidden></div>
+      <div class="sticky-action">
+        <div id="genProgress" class="progress" role="progressbar" aria-label="Generating test cases" hidden><span></span></div>
+        <button id="generateBtn" class="btn primary g-violet block lg" type="button"><svg class="ic btn-ico"><use href="#i-sparkles"/></svg><span class="btn-label">Generate test cases</span></button>
+      </div>
+    </section>
+
+    <!-- ============ Results ============ -->
+    <section id="panel-results" role="tabpanel" aria-labelledby="tab-results" hidden>
+      <div id="emptyResults" class="card">
+        <div class="empty">
+          <span class="empty-ico c-blue"><svg class="ic"><use href="#i-list-checks"/></svg></span>
+          <p>No test cases yet. Record a journey, then press <strong>Generate test cases</strong>.</p>
+        </div>
+      </div>
+      <div id="resultsView" hidden>
+        <div class="card c-blue">
+          <div class="card-head">
+            <div class="card-title">
+              <span class="h-ico"><svg class="ic"><use href="#i-list-checks"/></svg></span>
+              <h2><span id="resultsTotal">0</span> test cases</h2>
+            </div>
+          </div>
+          <p id="resultsMeta" class="hint"></p>
+          <div class="row wrap">
+            <button class="btn ghost sm" type="button" data-export="csv"><svg class="ic"><use href="#i-download"/></svg>CSV</button>
+            <button class="btn ghost sm" type="button" data-export="md"><svg class="ic"><use href="#i-download"/></svg>Markdown</button>
+            <button class="btn ghost sm" type="button" data-export="json"><svg class="ic"><use href="#i-download"/></svg>JSON</button>
+            <button class="btn ghost sm" type="button" id="copyAll"><svg class="ic"><use href="#i-copy"/></svg><span class="btn-label">Copy</span></button>
+          </div>
+        </div>
+        <div id="resultWarnings"></div>
+        <div id="usageCard" class="card usage c-amber" hidden>
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-chart"/></svg></span>
+            <h2>Usage</h2>
+          </div>
+          <div class="stats">
+            <div class="stat s-blue"><span class="stat-label">Input tokens</span><span class="stat-value" id="usageInput">0</span></div>
+            <div class="stat s-violet"><span class="stat-label">Output tokens</span><span class="stat-value" id="usageOutput">0</span></div>
+            <div class="stat s-green cost"><span class="stat-label">Cost</span><span class="stat-value" id="usageCost">—</span></div>
+          </div>
+          <p class="hint" id="usageNote" hidden></p>
+          <details class="compare">
+            <summary>Cost of this run on every model</summary>
+            <div class="table-wrap">
+              <table class="grid">
+                <thead><tr><th>Model</th><th>In $/1M</th><th>Out $/1M</th><th>Est. cost</th></tr></thead>
+                <tbody id="compareBody"></tbody>
+              </table>
+            </div>
+            <p class="hint">Estimates reuse this run's token counts at list prices; other tokenizers and output lengths will differ.</p>
+          </details>
+        </div>
+        <p id="resultsSummary" class="summary"></p>
+        <div class="row">
+          <input id="search" type="search" placeholder="Search test cases" aria-label="Search test cases">
+          <select id="priorityFilter" aria-label="Filter by priority" class="narrow">
+            <option value="">All priorities</option>
+            <option>Critical</option>
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+          <select id="typeFilter" aria-label="Filter by type" class="narrow">
+            <option value="">All types</option>
+            <option>Functional</option><option>Negative</option><option>Boundary</option><option>Validation</option>
+            <option>Accessibility</option><option>Security</option><option>Compatibility</option><option>Exploratory</option>
+            <option>Edge Case</option><option>UI</option><option>Usability</option><option>End-to-End</option>
+          </select>
+        </div>
+        <p id="filterCount" class="hint"></p>
+        <div class="select-bar">
+          <label class="check"><input type="checkbox" id="selectAll"> <span>Select all shown</span></label>
+          <span id="selectedCount" class="hint">0 selected for automation</span>
+        </div>
+        <div class="row">
+          <label class="hint" for="exportScope">Export</label>
+          <select id="exportScope" aria-label="Export all or selected test cases">
+            <option value="all">All test cases</option>
+            <option value="selected">Selected test cases</option>
+          </select>
+        </div>
+        <div id="caseList" class="cases"></div>
+      </div>
+    </section>
+
+    <!-- ============ Automate ============ -->
+    <section id="panel-automation" role="tabpanel" aria-labelledby="tab-automation" hidden>
+      <div class="card c-amber">
+        <div class="card-title">
+          <span class="h-ico"><svg class="ic"><use href="#i-wand"/></svg></span>
+          <h2>Convert to automation</h2>
+        </div>
+        <p class="hint">Tick the manual test cases in Results, pick a framework, then generate. Uses the provider and model from the Generate tab.</p>
+        <p id="autoSelected" class="muted">No test cases selected.</p>
+        <div class="segmented" id="automationFramework" role="radiogroup" aria-label="Automation framework">
+          <button type="button" data-value="playwright" role="radio" aria-checked="false">Playwright</button>
+          <button type="button" data-value="selenium" role="radio" aria-checked="false">Selenium</button>
+        </div>
+        <div class="field">
+          <label for="automationLanguage">Language</label>
+          <select id="automationLanguage"></select>
+          <p id="automationModeHint" class="hint">Choose AI-assisted generation or a grounded local template.</p>
+        </div>
+        <div class="field">
+          <label for="automationMode">Generation method</label>
+          <select id="automationMode">
+            <option value="ai">AI-assisted generation</option>
+            <option value="template">Grounded local template (no provider call)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="referenceScript" id="referenceLabel">Reference script</label>
+          <label for="referenceFile" class="hint">Upload a reference script (optional, max 250 KB)</label>
+          <input id="referenceFile" type="file" accept=".js,.ts,.py,.java,.cs,.robot,.txt" aria-label="Upload reference script">
+          <textarea id="referenceScript" class="code-input" rows="9" maxlength="256000" spellcheck="false"></textarea>
+          <p id="referenceHint" class="hint">AI-assisted mode follows the reference script's conventions and checks generated locators against captured context.</p>
+        </div>
+        <div id="automationStatus" class="banner" role="status" hidden></div>
+        <div id="autoProgress" class="progress" role="progressbar" aria-label="Generating automation script" hidden><span></span></div>
+        <button id="automateBtn" class="btn primary g-amber block lg" type="button" disabled><svg class="ic btn-ico"><use href="#i-wand"/></svg><span class="btn-label">Select test cases to automate</span></button>
+      </div>
+
+      <div id="automationResult" class="card c-violet" hidden>
+        <div class="card-head">
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-code"/></svg></span>
+            <h2 id="automationTitle">Automation script</h2>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn ghost sm" type="button" id="copyCode"><svg class="ic"><use href="#i-copy"/></svg><span class="btn-label">Copy</span></button>
+          <button class="btn ghost sm" type="button" id="downloadCode"><svg class="ic"><use href="#i-download"/></svg>Download</button>
+        </div>
+        <p id="automationMeta" class="hint"></p>
+        <div id="automationWarnings"></div>
+        <div id="automationGaps" class="gaps" hidden>
+          <h4>Gaps to complete by hand</h4>
+          <ul id="gapList"></ul>
+        </div>
+        <pre class="code"><code id="automationCode"></code></pre>
+      </div>
+    </section>
+
+    <!-- ============ Settings ============ -->
+    <section id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+      <div id="settingsBanner" class="banner" role="status" hidden></div>
+
+      <div class="card featured">
+        <div class="featured-head">
+          <span class="featured-icon"><svg class="ic"><use href="#i-zap"/></svg></span>
+          <div>
+            <h2>Groq API key <span class="badge">Recommended</span></h2>
+            <p class="hint">Primary provider for this app — blazing-fast inference on open models.</p>
+          </div>
+        </div>
+        <div id="groqKeyRow"></div>
+      </div>
+
+      <details class="card c-violet" id="otherProviders">
+        <summary>
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-layers"/></svg></span>
+            <h2>Other providers <span id="otherCount" class="chip off">0/4</span></h2>
+          </div>
+        </summary>
+        <p class="hint">Optional. OpenAI, Anthropic, Gemini and Inception Labs keys work the same way — add them any time.</p>
+        <div id="keyRows"></div>
+      </details>
+
+      <div class="card c-green">
+        <div class="card-head">
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-shield"/></svg></span>
+            <h2>Key storage</h2>
+          </div>
+          <button id="clearKeysBtn" class="btn danger sm" type="button"><svg class="ic"><use href="#i-trash"/></svg>Clear all</button>
+        </div>
+        <p class="hint">Keys stay in this browser and are sent only to that provider's API.</p>
+        <label class="switch">
+          <input type="checkbox" id="rememberKeys">
+          <span class="track" aria-hidden="true"></span>
+          <span>Remember keys</span>
+        </label>
+        <p class="hint">On: kept across browser restarts. Off: forgotten when the browser closes.</p>
+      </div>
+
+      <details class="card c-slate">
+        <summary>
+          <div class="card-title">
+            <span class="h-ico"><svg class="ic"><use href="#i-sliders"/></svg></span>
+            <h2>Advanced</h2>
+          </div>
+        </summary>
+        <div class="field">
+          <label for="timeoutMs">Request timeout (ms)</label>
+          <input id="timeoutMs" type="number" min="10000" max="280000" step="1000">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="maxTokens">Max output tokens</label>
+            <input id="maxTokens" type="number" min="256" max="128000" step="256">
+          </div>
+          <div class="field">
+            <label for="reasoningMaxTokens">Reasoning max tokens</label>
+            <input id="reasoningMaxTokens" type="number" min="1024" max="128000" step="1024">
+          </div>
+        </div>
+        <div class="row">
+          <button id="saveAdvanced" class="btn ghost sm" type="button"><svg class="ic"><use href="#i-check"/></svg>Save</button>
+          <button id="resetAdvanced" class="btn ghost sm" type="button"><svg class="ic"><use href="#i-refresh"/></svg>Reset defaults</button>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <a class="footer-logo" href="https://www.testleaf.com" target="_blank" rel="noopener">
+      <img src="../icons/testleaf-logo.svg" alt="TestLeaf — Always Ahead" height="34">
+    </a>
+    <p>© <span id="copyrightYear">2026</span> TestLeaf Software Solutions Pvt. Ltd. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="sidepanel.js"></script>
+  <script type="module" src="settings-tab.js"></script>
+  <script type="module" src="generate-tab.js"></script>
+  <script type="module" src="automation-tab.js"></script>
+</body>
+</html>

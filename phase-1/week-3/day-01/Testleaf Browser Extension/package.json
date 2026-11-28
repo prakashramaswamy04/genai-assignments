@@ -1,0 +1,19 @@
+{
+  "name": "ledge-3.0",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Ledge-3.0 dev tooling only. The extension itself needs no Node: Load unpacked this folder.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "icons": "node tools/make-icons.mjs",
+    "parity": "node tools/parity-recorder.mjs",
+    "parity:payloads": "node tools/parity-payloads.mjs",
+    "parity:prompts": "node tools/parity-prompts.mjs",
+    "docs:shots": "node tools/docs-screenshots.mjs",
+    "docs:build": "python tools/build-manual.py"
+  },
+  "devDependencies": {
+    "playwright-core": "1.64.1"
+  }
+}
